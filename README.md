@@ -14,6 +14,6 @@ The tests are based on my own manual tests of the C++ version.
 
 This package is MIT licensed.
 
-The license for https://github.com/zentures/cityhash is available at [LICENSES/zentures](LICENCES/zentures)
+The license for https://github.com/zentures/cityhash is available at [LICENSES/zentures](LICENSES/zentures)
 
-The license for CityHash is available at [LICENSES/CityHash](LICENCES/CityHash)
+The license for CityHash is available at [LICENSES/CityHash](LICENSES/CityHash)
