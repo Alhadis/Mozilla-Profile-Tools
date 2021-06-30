@@ -180,7 +180,7 @@ func CityHash64(s []byte, length uint32) uint64 {
 	x = rotate(z+x, 39) * k1
 	y = rotate(y, 33) * k1
 
-	// Decrease len to the nearest multiple of 64, and operate on 64-byte chunks.
+	// Decrease length to the nearest multiple of 64, and operate on 64-byte chunks.
 	length = (length - 1) & ^uint32(63)
 	for {
 		x = rotate(x+y+v.Lower64()+unalignedLoad64(s[16:]), 37) * k1
@@ -220,14 +220,14 @@ func cityMurmur(s []byte, length uint32, seed Uint128) Uint128 {
 	var c uint64 = 0
 	var d uint64 = 0
 	var l int32 = int32(length) - 16
-	if l <= 0 { // len <= 16
+	if l <= 0 { // length <= 16
 		c = b*k1 + hashLen0to16(s, length)
 		if length >= 8 {
 			d = rotate(a+unalignedLoad64(s), 32)
 		} else {
 			d = rotate(a+c, 32)
 		}
-	} else { // len > 16
+	} else { // length > 16
 		c = hashLen16(unalignedLoad64(s[length-8:])+k1, a)
 		d = hashLen16(b+uint64(length), c+unalignedLoad64(s[length-16:]))
 		a += d
