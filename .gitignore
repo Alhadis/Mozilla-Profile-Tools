@@ -20,5 +20,4 @@ yarn.lock
 # Project-specific
 /mozinstallhash
 /mozlz4
-/mozlz4-src
 /sources

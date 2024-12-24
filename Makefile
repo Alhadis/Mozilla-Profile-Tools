@@ -16,7 +16,9 @@ mozlz4: $(mozlz4)
 	./$@ --help | grep -iqF 'Decompress and compress mozlz4 files'
 
 mozlz4-src:
-	git clone https://github.com/jusw85/mozlz4.git $@
+	git submodule init
+	git submodule sync --quiet
+	git submodule update -- $@
 
 $(mozlz4): mozlz4-src
 	cd $^ && cargo build --release
@@ -34,7 +36,6 @@ install: $(targets)
 
 # Purge directory of generated and untracked files
 clean:
-	rm -rf mozlz4-src
 	rm -f ${targets}
 	if test -d sources; then \
 		chmod -R u+w sources; \

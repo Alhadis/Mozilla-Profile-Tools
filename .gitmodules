@@ -1,0 +1,3 @@
+[submodule "mozlz4-src"]
+	path = mozlz4-src
+	url = https://github.com/jusw85/mozlz4.git
