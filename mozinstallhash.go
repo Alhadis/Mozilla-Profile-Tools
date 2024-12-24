@@ -1,3 +1,5 @@
+// Copyright (c) 2021 bradenhilton
+// SPDX-License-Identifier: MIT
 package main
 
 import (
