@@ -22,6 +22,7 @@ yarn.lock
 *.jsonlz4
 *.json.lz4
 *.mozlz4
+/fixtures/tmp.*
 /mozinstallhash
 /mozlz4
 /sources
