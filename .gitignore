@@ -18,6 +18,10 @@ yarn.lock
 /test.*
 
 # Project-specific
+*.baklz4
+*.jsonlz4
+*.json.lz4
+*.mozlz4
 /mozinstallhash
 /mozlz4
 /sources
