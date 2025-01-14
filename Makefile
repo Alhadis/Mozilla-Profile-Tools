@@ -56,7 +56,7 @@ test: \
 test-mozinstallhash: mozinstallhash
 	@ ${testHeader} \
 	expectHash(){ \
-		set -- "$$@" "`mozinstallhash "$$2"`"; \
+		set -- "$$@" "`./$? "$$2"`"; \
 		case "$$3" in "$$1");; *) \
 			printf >&2 'Assertion failed for "%s":\n' "$$2"; \
 			printf >&2 '\tExpected: %s\n' "$$1"; \
