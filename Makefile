@@ -5,16 +5,16 @@ all: $(targets)
 
 # Program for computing hashes used in Mozilla installation profiles
 mozinstallhash: mozinstallhash.go
-	go build $^
+	go build $?
 	./$@ Foo | grep -qiF 9A12EB455E563003
 
 
 # MozLZ4-encoder and decoder tool
 mozlz4: mozlz4-src
-	cd $^ && cargo build --release
+	cd $? && cargo build --release
 	mv -v mozlz4-src/target/release/mozlz4 $@
 	./$@ --help | grep -iqF 'Decompress and compress mozlz4 files'
-	cd $^ && cargo clean -vv && ${resetRepoTimestamp}
+	cd $? && cargo clean -vv && ${resetRepoTimestamp}
 
 mozlz4-src:
 	git submodule init
@@ -32,7 +32,7 @@ prefix = /usr/local
 bindir = ${prefix}/bin
 
 install: $(targets)
-	install -vpC $^ "${bindir}"
+	install -vpC ${targets} "${bindir}"
 
 .PHONY: install
 
@@ -75,18 +75,18 @@ test-mozlz4: mozlz4
 	rm -rf fixtures/*.baklz4; \
 	set -e; \
 	set -- 'fixtures/search.json'; \
-	./$^ --compress "$$1" "$$1.mozlz4"; \
+	./$? --compress "$$1" "$$1.mozlz4"; \
 	test "`size "$$1"`"        -eq 529; \
 	test "`size "$$1.mozlz4"`" -eq 327; \
 	cd fixtures && $$sha256c SHA256; \
 	set -- "$${1#*/}.mozlz4"; \
-	../$^ --extract "$$1" "$$1.baklz4"; \
+	../$? --extract "$$1" "$$1.baklz4"; \
 	test "`size "$$1.baklz4"`" -eq "`size "$${1%.*}"`"; \
 	hashesMatch "$$1.baklz4" "$${1%.*}"; \
-	../$^ --compress search.json -        | startsWith 'mozLz40'; \
-	../$^ --extract  search.json.mozlz4 - | startsWith '{"version":10,'; \
-	../$^ --compress - tmp.baklz4 < search.json; \
-	../$^ --extract  - tmp.json   < tmp.baklz4; \
+	../$? --compress search.json -        | startsWith 'mozLz40'; \
+	../$? --extract  search.json.mozlz4 - | startsWith '{"version":10,'; \
+	../$? --compress - tmp.baklz4 < search.json; \
+	../$? --extract  - tmp.json   < tmp.baklz4; \
 	hashesMatch tmp.baklz4 search.json.mozlz4; \
 	hashesMatch tmp.json   search.json;
 	@ ${testFooter}
@@ -95,7 +95,7 @@ test-mozlz4: mozlz4
 # TODO: Use a more elegant workaround for `--quiet` switches
 #       passed to sha256sum(1) when not verifying checksums.
 testHeader = \
-	echo "Testing $^…"; \
+	echo "Testing $?…"; \
 	if command -v sha256sum >/dev/null 2>&1; \
 		then sha256='sha256sum'; sha256c="$$sha256 --quiet -c"; \
 		else sha256='sha256 -r'; sha256c="$$sha256 -qc"; \
@@ -117,5 +117,5 @@ testHeader = \
 
 # Commands executed after a completed test-* task
 testFooter = \
-	echo "Tests passed for $^!"; \
+	echo "Tests passed for $?!"; \
 	git clean -xfd fixtures
