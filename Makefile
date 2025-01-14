@@ -12,7 +12,7 @@ mozinstallhash: mozinstallhash.go
 # MozLZ4-encoder and decoder tool
 mozlz4: mozlz4-src
 	cd $? && cargo build --release
-	mv -v mozlz4-src/target/release/mozlz4 $@
+	mv mozlz4-src/target/release/mozlz4 $@
 	./$@ --help | grep -iqF 'Decompress and compress mozlz4 files'
 	cd $? && cargo clean -vv && ${resetRepoTimestamp}
 
