@@ -96,7 +96,7 @@ test-mozlz4: mozlz4
 # TODO: Use a more elegant workaround for `--quiet` switches
 #       passed to sha256sum(1) when not verifying checksums.
 testHeader = \
-	echo "Testing $?…"; \
+	echo "Testing $?..."; \
 	if command -v sha256sum >/dev/null 2>&1; \
 		then sha256='sha256sum'; sha256c="$$sha256 --quiet -c"; \
 		else sha256='sha256 -r'; sha256c="$$sha256 -qc"; \
