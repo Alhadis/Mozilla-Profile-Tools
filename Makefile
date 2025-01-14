@@ -99,7 +99,7 @@ testHeader = \
 	echo "Testing $?..."; \
 	if command -v sha256sum >/dev/null 2>&1; \
 		then sha256='sha256sum'; sha256c="$$sha256 --quiet -c"; \
-		else sha256='sha256 -r'; sha256c="$$sha256 -qc"; \
+		else sha256='sha256 -r'; sha256c="$${sha256%% *} -qc"; \
 	fi; \
 	case `stat --version 2>/dev/null` in \
 		*GNU*) size(){ stat -c %s "$$1"; } ;; \
