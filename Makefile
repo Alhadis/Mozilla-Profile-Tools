@@ -24,7 +24,7 @@ mozlz4-src:
 # Set the access and modification times of a submodule to its last commit
 resetRepoTimestamp = \
 	git show --no-patch --format='%at %ct' \
-	| xargs perl -E 'my($t)=sort{$b<=>$a}(shift,shift);utime $t,$t,"."';
+	| xargs perl -E 'my($$t)=sort{$$b<=>$$a}(shift,shift);utime $$t,$$t,"."';
 
 
 # Use a BSD-style install(1) to move the built programs to one's $PATH
