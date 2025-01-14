@@ -16,10 +16,11 @@ mozlz4: mozlz4-src
 	./$@ --help | grep -iqF 'Decompress and compress mozlz4 files'
 	cd $? && cargo clean -vv && ${resetRepoTimestamp}
 
-mozlz4-src:
+mozlz4-src: mozlz4-src/.git
+mozlz4-src/.git:
 	git submodule init
 	git submodule sync --quiet
-	git submodule update -- $@
+	git submodule update -- $(@D)
 
 # Set the access and modification times of a submodule to its last commit
 resetRepoTimestamp = \
