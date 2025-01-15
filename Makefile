@@ -33,6 +33,7 @@ prefix = /usr/local
 bindir = ${prefix}/bin
 
 install: $(targets)
+	test -d "${bindir}" || mkdir -p "${bindir}"
 	install -pC ${targets} "${bindir}"
 
 .PHONY: install
