@@ -33,7 +33,7 @@ prefix = /usr/local
 bindir = ${prefix}/bin
 
 install: $(targets)
-	install -vpC ${targets} "${bindir}"
+	install -pC ${targets} "${bindir}"
 
 .PHONY: install
 
